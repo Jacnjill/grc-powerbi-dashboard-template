@@ -36,3 +36,9 @@ def on_pre_build(config) -> None:
             raise FileNotFoundError(f"Expected downloadable file missing: {src}")
         _copy(src, DEST / src.name)
     _copy(ROOT / "powerquery", DEST / "powerquery")
+
+
+def on_post_build(config) -> None:
+    # Stop GitHub Pages running Jekyll over the already-built MkDocs site.
+    site_dir = Path(config["site_dir"])
+    (site_dir / ".nojekyll").write_text("")
