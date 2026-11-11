@@ -1,0 +1,13 @@
+Owner_ID,Owner_Name,Role,Entity,Function,Email,Line_Manager,Data_Flag
+OWN-01,J. Bennett,Group Information Security Manager,Group,Information security,j.bennett@example.org,Chief Operating Officer,Fictional sample
+OWN-02,A. Rahman,IT Security Lead,United Kingdom,IT,a.rahman@example.org,J. Bennett,Fictional sample
+OWN-03,P. Hughes,People Lead,United Kingdom,People,p.hughes@example.org,J. Bennett,Fictional sample
+OWN-04,M. García,Information Security Lead,Spain,Information security,m.garcia@example.org,J. Bennett,Fictional sample
+OWN-05,C. Vargas,IT Operations,Spain,IT,c.vargas@example.org,M. García,Fictional sample
+OWN-06,C. Dubois,Information Security Lead,France,Information security,c.dubois@example.org,J. Bennett,Fictional sample
+OWN-07,N. Laurent,IT Operations,France,IT,n.laurent@example.org,C. Dubois,Fictional sample
+OWN-08,L. Schmidt,Information Security Lead,Germany,Information security,l.schmidt@example.org,J. Bennett,Fictional sample
+OWN-09,K. Weber,IT Operations,Germany,IT,k.weber@example.org,L. Schmidt,Fictional sample
+OWN-10,R. Okonkwo,Data Protection Officer,Group,Data protection,r.okonkwo@example.org,Chief Operating Officer,Fictional sample
+OWN-11,S. Patel,Supplier Risk Lead,Group,Procurement,s.patel@example.org,J. Bennett,Fictional sample
+OWN-12,T. Walsh,Internal Audit Manager,Group,Internal audit,t.walsh@example.org,Chief Operating Officer,Fictional sample

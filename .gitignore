@@ -1,0 +1,33 @@
+# Built documentation (MkDocs hook also copies artefacts here)
+site/
+docs/downloads/
+
+# Power BI Desktop artefacts (keep the template source, not binary reports)
+*.pbix
+*.pbit
+*.pbix.lock
+*.pbids
+
+# Excel and Office lock / backup files
+~$*
+*.tmp
+*.bak
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+
+# Local overrides (paths, credentials, tenant settings)
+local.settings.json
+*.user.json
+
+# Logs
+*.log

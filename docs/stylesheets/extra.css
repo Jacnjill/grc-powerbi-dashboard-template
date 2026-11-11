@@ -1,0 +1,31 @@
+/* Neutral executive palette, aligned with the Power BI theme (navy / ink). */
+:root {
+  --md-primary-fg-color: #1B365D;
+  --md-primary-fg-color--light: #2E6B8A;
+  --md-primary-fg-color--dark: #12243E;
+  --md-accent-fg-color: #2E6B8A;
+  --md-accent-fg-color--transparent: rgba(46, 107, 138, 0.1);
+  --md-typeset-a-color: #2E6B8A;
+}
+
+[data-md-color-scheme="slate"] {
+  --md-primary-fg-color: #2E6B8A;
+  --md-primary-fg-color--light: #4A9BB4;
+  --md-primary-fg-color--dark: #1B365D;
+  --md-accent-fg-color: #4A9BB4;
+  --md-typeset-a-color: #4A9BB4;
+}
+
+.md-typeset h1,
+.md-typeset h2 {
+  font-weight: 600;
+}
+
+.md-typeset table:not([class]) th {
+  background-color: #1B365D;
+  color: #ffffff;
+}
+
+[data-md-color-scheme="slate"] .md-typeset table:not([class]) th {
+  background-color: #2E6B8A;
+}

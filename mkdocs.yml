@@ -1,0 +1,93 @@
+site_name: GRC Power BI dashboard template
+site_description: A reusable Power BI template for an executive ISO 27001 continual improvement and internal audit dashboard.
+site_url: https://jacnjill.github.io/grc-powerbi-dashboard-template/
+repo_url: https://github.com/Jacnjill/grc-powerbi-dashboard-template
+repo_name: Jacnjill/grc-powerbi-dashboard-template
+edit_uri: edit/main/docs/
+copyright: Released under the MIT Licence. Sample data is fictional and is not live evidence.
+
+theme:
+  name: material
+  custom_dir: overrides
+  language: en
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+  font:
+    text: Roboto
+    code: Roboto Mono
+  features:
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - navigation.footer
+    - search.highlight
+    - search.suggest
+    - content.code.copy
+    - content.action.edit
+    - toc.follow
+  icon:
+    repo: fontawesome/brands/github
+
+hooks:
+  - hooks.py
+
+plugins:
+  - search:
+      lang: en
+
+extra:
+  comments: true
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/Jacnjill/grc-powerbi-dashboard-template
+      name: Repository on GitHub
+
+extra_css:
+  - stylesheets/extra.css
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+
+nav:
+  - Home: index.md
+  - Source workbook: 01-source-workbook-spec.md
+  - Data model: 02-data-model.md
+  - Report pages: 03-report-pages.md
+  - Risk-candidate rules: 04-risk-candidate-rules.md
+  - Theme and style: 05-theme-and-style.md
+  - Build checklist: 06-build-checklist.md
+  - Downloads: downloads.md
