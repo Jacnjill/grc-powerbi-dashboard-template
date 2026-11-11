@@ -1,0 +1,1829 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A reusable Power BI template for an executive ISO 27001 continual improvement and internal audit dashboard.">
+      
+      
+      
+        <link rel="canonical" href="https://jacnjill.github.io/grc-powerbi-dashboard-template/01-source-workbook-spec/">
+      
+      
+        <link rel="prev" href="..">
+      
+      
+        <link rel="next" href="../02-data-model/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.1">
+    
+    
+      
+        <title>Source workbook - GRC Power BI dashboard template</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.57a0d79d.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.fb2fffe2.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#source-workbook-specification" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="GRC Power BI dashboard template" class="md-header__button md-logo" aria-label="GRC Power BI dashboard template" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            GRC Power BI dashboard template
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Source workbook
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/Jacnjill/grc-powerbi-dashboard-template" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Jacnjill/grc-powerbi-dashboard-template
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="GRC Power BI dashboard template" class="md-nav__button md-logo" aria-label="GRC Power BI dashboard template" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    GRC Power BI dashboard template
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/Jacnjill/grc-powerbi-dashboard-template" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Jacnjill/grc-powerbi-dashboard-template
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Source workbook
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Source workbook
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#sheet-1-internal-audit-findings-required" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sheet 1 — Internal Audit Findings (required)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sheet-2-control-maturity-required" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sheet 2 — Control Maturity (required)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Sheet 2 — Control Maturity (required)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#shared-columns-left-hand-side" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Shared columns (left-hand side)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#repeated-block-for-each-country-entity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Repeated block for each &lt;Country&gt; / &lt;Entity&gt;
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#maturity-scale-template-default" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Maturity scale (template default)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sheet-3-risk-theme-mapping-recommended" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sheet 3 — Risk Theme Mapping (recommended)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Sheet 3 — Risk Theme Mapping (recommended)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#suggested-theme-catalogue-edit-freely" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Suggested theme catalogue (edit freely)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sheet-4-owners-recommended" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sheet 4 — Owners (recommended)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#optional-extra-columns-and-tabs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Optional extra columns and tabs
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#column-mapping-table" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Column-mapping table
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Column-mapping table">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#internal-audit-findings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Internal Audit Findings
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#control-maturity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Control Maturity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#risk-theme-mapping" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Risk Theme Mapping
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#owners" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Owners
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#file-handling-notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        File handling notes
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-data-model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-report-pages/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Report pages
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-risk-candidate-rules/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Risk-candidate rules
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-theme-and-style/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Theme and style
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06-build-checklist/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Build checklist
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../downloads/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Downloads
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#sheet-1-internal-audit-findings-required" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sheet 1 — Internal Audit Findings (required)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sheet-2-control-maturity-required" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sheet 2 — Control Maturity (required)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Sheet 2 — Control Maturity (required)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#shared-columns-left-hand-side" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Shared columns (left-hand side)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#repeated-block-for-each-country-entity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Repeated block for each &lt;Country&gt; / &lt;Entity&gt;
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#maturity-scale-template-default" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Maturity scale (template default)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sheet-3-risk-theme-mapping-recommended" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sheet 3 — Risk Theme Mapping (recommended)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Sheet 3 — Risk Theme Mapping (recommended)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#suggested-theme-catalogue-edit-freely" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Suggested theme catalogue (edit freely)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sheet-4-owners-recommended" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sheet 4 — Owners (recommended)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#optional-extra-columns-and-tabs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Optional extra columns and tabs
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#column-mapping-table" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Column-mapping table
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Column-mapping table">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#internal-audit-findings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Internal Audit Findings
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#control-maturity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Control Maturity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#risk-theme-mapping" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Risk Theme Mapping
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#owners" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Owners
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#file-handling-notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        File handling notes
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="https://github.com/Jacnjill/grc-powerbi-dashboard-template/edit/main/docs/01-source-workbook-spec.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+    </a>
+  
+  
+
+
+<h1 id="source-workbook-specification">Source workbook specification<a class="headerlink" href="#source-workbook-specification" title="Permanent link">&para;</a></h1>
+<p>The dashboard is designed around one Excel workbook, typically called <strong>Continual Improvement Plan</strong>. The template expects <strong>four worksheets</strong>. Two are required for the core model; two are strongly recommended and are used for the risk heat map and ownership page.</p>
+<p>All names below are <strong>canonical names</strong>. Your live workbook may differ. Use the <a href="#column-mapping-table">column-mapping table</a> to record the actual headings and rename to these names in Power Query.</p>
+<p>Placeholder tokens used in this kit:</p>
+<ul>
+<li><code>&lt;Entity&gt;</code> — the organisational unit the finding or maturity score belongs to (country, region, business unit or legal entity)</li>
+<li><code>&lt;Country&gt;</code> — used in the sample as the entity grain (United Kingdom, Spain, France, Germany). Replace with whatever grain you report on.</li>
+<li><code>&lt;Owner&gt;</code> — the person accountable for closing the finding</li>
+<li><code>&lt;Control ID&gt;</code> — an ISO 27001:2022 Annex A control identifier such as <code>8.5</code></li>
+</ul>
+<p>Sample files in <code>sample-data/</code> are <strong>fictional</strong> and labelled as such in every row (<code>Data_Flag = Fictional sample</code>).</p>
+<hr />
+<h2 id="sheet-1-internal-audit-findings-required">Sheet 1 — Internal Audit Findings (required)<a class="headerlink" href="#sheet-1-internal-audit-findings-required" title="Permanent link">&para;</a></h2>
+<p>This is the main fact table. One row equals one finding.</p>
+<table>
+<thead>
+<tr>
+<th>Canonical column</th>
+<th>Type</th>
+<th>Required</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Finding_ID</td>
+<td>Text</td>
+<td>Yes</td>
+<td>Unique identifier, for example <code>IA-2026-014</code></td>
+</tr>
+<tr>
+<td>Finding_Title</td>
+<td>Text</td>
+<td>Yes</td>
+<td>Short name shown in tables and tooltips</td>
+</tr>
+<tr>
+<td>Finding_Type</td>
+<td>Text</td>
+<td>Yes</td>
+<td>One of <code>NC</code>, <code>OFI</code>, <code>Gap</code>, <code>OBS</code> (see README)</td>
+</tr>
+<tr>
+<td>Severity</td>
+<td>Text</td>
+<td>Yes</td>
+<td>One of <code>Critical</code>, <code>High</code>, <code>Medium</code>, <code>Low</code></td>
+</tr>
+<tr>
+<td>Control_ID</td>
+<td>Text</td>
+<td>Yes</td>
+<td>ISO 27001:2022 Annex A id, for example <code>5.19</code> or <code>8.8</code></td>
+</tr>
+<tr>
+<td>Entity</td>
+<td>Text</td>
+<td>Yes</td>
+<td><code>&lt;Entity&gt;</code> / <code>&lt;Country&gt;</code> the finding was raised against</td>
+</tr>
+<tr>
+<td>Owner_ID</td>
+<td>Text</td>
+<td>Yes</td>
+<td>Key to the Owners sheet</td>
+</tr>
+<tr>
+<td>Owner_Name</td>
+<td>Text</td>
+<td>No</td>
+<td>Convenience copy; the Owners dimension is authoritative</td>
+</tr>
+<tr>
+<td>Raised_Date</td>
+<td>Date</td>
+<td>Yes</td>
+<td>Date the finding was raised</td>
+</tr>
+<tr>
+<td>Target_Date</td>
+<td>Date</td>
+<td>Yes</td>
+<td>Agreed closure date</td>
+</tr>
+<tr>
+<td>Status</td>
+<td>Text</td>
+<td>Yes</td>
+<td>One of <code>Open</code>, <code>In Progress</code>, <code>Closed</code></td>
+</tr>
+<tr>
+<td>Closed_Date</td>
+<td>Date</td>
+<td>Conditional</td>
+<td>Required when Status = <code>Closed</code>; leave blank otherwise</td>
+</tr>
+<tr>
+<td>Risk_Theme_ID</td>
+<td>Text</td>
+<td>Yes</td>
+<td>Key to the Risk Theme Mapping sheet (or a theme code you maintain)</td>
+</tr>
+<tr>
+<td>Risk_Theme</td>
+<td>Text</td>
+<td>No</td>
+<td>Convenience copy of the theme name</td>
+</tr>
+<tr>
+<td>Description</td>
+<td>Text</td>
+<td>No</td>
+<td>Longer narrative; useful in tooltips and drill-through</td>
+</tr>
+<tr>
+<td>Root_Cause</td>
+<td>Text</td>
+<td>No</td>
+<td>If captured</td>
+</tr>
+<tr>
+<td>Source</td>
+<td>Text</td>
+<td>No</td>
+<td>For example <code>Internal audit</code>, <code>Surveillance audit</code>, <code>Management review</code>, <code>Incident review</code></td>
+</tr>
+<tr>
+<td>Auditor</td>
+<td>Text</td>
+<td>No</td>
+<td>Person or team who raised it</td>
+</tr>
+<tr>
+<td>Data_Flag</td>
+<td>Text</td>
+<td>Sample only</td>
+<td>In the sample file this is always <code>Fictional sample</code>. Remove or ignore in live use.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Validation rules (recommend enforcing in Excel or Power Query):</strong></p>
+<ul>
+<li><code>Finding_ID</code> is unique and not blank.</li>
+<li><code>Finding_Type</code>, <code>Severity</code> and <code>Status</code> use only the allowed values (or a documented synonym that you map).</li>
+<li><code>Closed_Date</code> is blank if Status is not <code>Closed</code>, and is on or after <code>Raised_Date</code>.</li>
+<li><code>Target_Date</code> is on or after <code>Raised_Date</code>.</li>
+<li>Every <code>Control_ID</code> exists in Annex A (or in your Statement of Applicability).</li>
+<li>Every <code>Owner_ID</code> exists on the Owners sheet.</li>
+<li>Every <code>Risk_Theme_ID</code> exists on the Risk Theme Mapping sheet.</li>
+</ul>
+<hr />
+<h2 id="sheet-2-control-maturity-required">Sheet 2 — Control Maturity (required)<a class="headerlink" href="#sheet-2-control-maturity-required" title="Permanent link">&para;</a></h2>
+<p>One <strong>row per control</strong>. Maturity and related evidence are <strong>repeated as country (or entity) blocks</strong> side by side. This is the layout most improvement-plan workbooks already use. Power Query unpivots the blocks into a tall fact table (one row per control per entity). See <code>powerquery/03-control-maturity.m</code> and <code>docs/02-data-model.md</code>.</p>
+<h3 id="shared-columns-left-hand-side">Shared columns (left-hand side)<a class="headerlink" href="#shared-columns-left-hand-side" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Canonical column</th>
+<th>Type</th>
+<th>Required</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Control_ID</td>
+<td>Text</td>
+<td>Yes</td>
+<td>ISO 27001:2022 Annex A id</td>
+</tr>
+<tr>
+<td>Control_Name</td>
+<td>Text</td>
+<td>Yes</td>
+<td>Short control title</td>
+</tr>
+<tr>
+<td>Annex_Category</td>
+<td>Text</td>
+<td>No</td>
+<td><code>Organizational</code>, <code>People</code>, <code>Physical</code> or <code>Technological</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="repeated-block-for-each-country-entity">Repeated block for each <code>&lt;Country&gt;</code> / <code>&lt;Entity&gt;</code><a class="headerlink" href="#repeated-block-for-each-country-entity" title="Permanent link">&para;</a></h3>
+<p>Repeat the following columns once per entity. In the sample the prefixes are <code>UK_</code>, <code>Spain_</code>, <code>France_</code> and <code>Germany_</code>. Replace prefixes with your own entity codes, and update the unpivot list in Power Query.</p>
+<table>
+<thead>
+<tr>
+<th>Canonical suffix</th>
+<th>Type</th>
+<th>Required</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>_Maturity</code></td>
+<td>Whole number</td>
+<td>Yes</td>
+<td>Integer 1–5 (see scale below)</td>
+</tr>
+<tr>
+<td><code>_Open_NC</code></td>
+<td>Whole number</td>
+<td>Yes</td>
+<td>Count of open or in-progress nonconformities for this control in this entity. Prefer a formula that counts from the Findings sheet so the two tabs cannot drift.</td>
+</tr>
+<tr>
+<td><code>_Open_OFI</code></td>
+<td>Whole number</td>
+<td>Yes</td>
+<td>Count of open or in-progress opportunities for improvement</td>
+</tr>
+<tr>
+<td><code>_Linked_Risk</code></td>
+<td>Text</td>
+<td>No</td>
+<td>Existing risk-register id if one is already linked, for example <code>R-014</code>. Leave blank if none.</td>
+</tr>
+</tbody>
+</table>
+<p>Optional suffixes you may add and unpivot in the same way: <code>_Open_Gap</code>, <code>_Open_OBS</code>, <code>_Last_Assessed</code>, <code>_Assessor</code>, <code>_Comments</code>.</p>
+<h3 id="maturity-scale-template-default">Maturity scale (template default)<a class="headerlink" href="#maturity-scale-template-default" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Score</th>
+<th>Rating</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Informal</td>
+<td>Ad hoc practice; little or no documentation</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Documented</td>
+<td>Policy or process exists, but operation is inconsistent</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Implemented</td>
+<td>Operated consistently in the entity</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Measured</td>
+<td>Operated and monitored, with evidence and KRIs</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Improving</td>
+<td>Measured, reviewed and demonstrably improving</td>
+</tr>
+</tbody>
+</table>
+<p>Risk-candidate rule 3 treats a score of <strong>2 or below</strong> plus an open NC as a candidate. If you use a different scale, change the threshold in <code>docs/04-risk-candidate-rules.md</code> and in the DAX.</p>
+<hr />
+<h2 id="sheet-3-risk-theme-mapping-recommended">Sheet 3 — Risk Theme Mapping (recommended)<a class="headerlink" href="#sheet-3-risk-theme-mapping-recommended" title="Permanent link">&para;</a></h2>
+<p>Maps each Annex A control to one <strong>strategic risk theme</strong>. The heat map and the risk-candidate rules aggregate at this grain, not at individual control level (although control-level drill-through is still available).</p>
+<p>If your workbook does not yet have this sheet, create it. Assigning a theme after the fact in Power Query is possible but harder to govern.</p>
+<table>
+<thead>
+<tr>
+<th>Canonical column</th>
+<th>Type</th>
+<th>Required</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Control_ID</td>
+<td>Text</td>
+<td>Yes</td>
+<td>Annex A id (one row per control in the simple mapping)</td>
+</tr>
+<tr>
+<td>Control_Name</td>
+<td>Text</td>
+<td>No</td>
+<td>Convenience copy</td>
+</tr>
+<tr>
+<td>Annex_Category</td>
+<td>Text</td>
+<td>No</td>
+<td>Organizational / People / Physical / Technological</td>
+</tr>
+<tr>
+<td>Risk_Theme_ID</td>
+<td>Text</td>
+<td>Yes</td>
+<td>Stable code, for example <code>RT-01</code></td>
+</tr>
+<tr>
+<td>Risk_Theme</td>
+<td>Text</td>
+<td>Yes</td>
+<td>Display name, for example <code>Access control and identity</code></td>
+</tr>
+<tr>
+<td>Theme_Description</td>
+<td>Text</td>
+<td>No</td>
+<td>One-sentence definition of the theme</td>
+</tr>
+<tr>
+<td>Default_Likelihood</td>
+<td>Whole number</td>
+<td>No</td>
+<td>1–5 planning value used when a theme is promoted to the risk register</td>
+</tr>
+<tr>
+<td>Default_Impact</td>
+<td>Whole number</td>
+<td>No</td>
+<td>1–5 planning value</td>
+</tr>
+<tr>
+<td>Data_Flag</td>
+<td>Text</td>
+<td>Sample only</td>
+<td><code>Fictional sample</code> in the sample file</td>
+</tr>
+</tbody>
+</table>
+<p>A control should map to <strong>one primary theme</strong>. If you genuinely need many-to-many, add a bridge table rather than duplicating fact rows.</p>
+<h3 id="suggested-theme-catalogue-edit-freely">Suggested theme catalogue (edit freely)<a class="headerlink" href="#suggested-theme-catalogue-edit-freely" title="Permanent link">&para;</a></h3>
+<p>These are generic information-security themes suitable for most ISO 27001 programmes. Rename or replace them to match your risk-management framework.</p>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Theme</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RT-01</td>
+<td>Access control and identity</td>
+</tr>
+<tr>
+<td>RT-02</td>
+<td>Third-party and supply chain</td>
+</tr>
+<tr>
+<td>RT-03</td>
+<td>Data protection and confidentiality</td>
+</tr>
+<tr>
+<td>RT-04</td>
+<td>Vulnerability and technical hygiene</td>
+</tr>
+<tr>
+<td>RT-05</td>
+<td>Human factor and awareness</td>
+</tr>
+<tr>
+<td>RT-06</td>
+<td>Incident response and resilience</td>
+</tr>
+<tr>
+<td>RT-07</td>
+<td>Asset and change management</td>
+</tr>
+<tr>
+<td>RT-08</td>
+<td>Cloud and emerging technology</td>
+</tr>
+<tr>
+<td>RT-09</td>
+<td>Physical and environmental security</td>
+</tr>
+<tr>
+<td>RT-10</td>
+<td>Compliance and assurance</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="sheet-4-owners-recommended">Sheet 4 — Owners (recommended)<a class="headerlink" href="#sheet-4-owners-recommended" title="Permanent link">&para;</a></h2>
+<p>Lookup of finding owners. Used on the Ownership page (open / overdue / on-time performance) and for escalation labels.</p>
+<table>
+<thead>
+<tr>
+<th>Canonical column</th>
+<th>Type</th>
+<th>Required</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Owner_ID</td>
+<td>Text</td>
+<td>Yes</td>
+<td>Unique key, referenced by Findings</td>
+</tr>
+<tr>
+<td>Owner_Name</td>
+<td>Text</td>
+<td>Yes</td>
+<td>Display name (<code>&lt;Owner&gt;</code>)</td>
+</tr>
+<tr>
+<td>Role</td>
+<td>Text</td>
+<td>Yes</td>
+<td>For example <code>Information Security Lead</code>, <code>IT Operations</code>, <code>Data Protection Officer</code></td>
+</tr>
+<tr>
+<td>Entity</td>
+<td>Text</td>
+<td>Yes</td>
+<td>Home <code>&lt;Entity&gt;</code> / <code>&lt;Country&gt;</code>, or <code>Group</code> for a central function</td>
+</tr>
+<tr>
+<td>Function</td>
+<td>Text</td>
+<td>No</td>
+<td>For example <code>Information security</code>, <code>IT</code>, <code>People</code>, <code>Procurement</code>, <code>Internal audit</code></td>
+</tr>
+<tr>
+<td>Email</td>
+<td>Text</td>
+<td>No</td>
+<td>Use a generic address pattern in examples</td>
+</tr>
+<tr>
+<td>Line_Manager</td>
+<td>Text</td>
+<td>No</td>
+<td>Name or id of the person overdue items escalate to</td>
+</tr>
+<tr>
+<td>Data_Flag</td>
+<td>Text</td>
+<td>Sample only</td>
+<td><code>Fictional sample</code> in the sample file</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="optional-extra-columns-and-tabs">Optional extra columns and tabs<a class="headerlink" href="#optional-extra-columns-and-tabs" title="Permanent link">&para;</a></h2>
+<p>The four tabs above are enough to build every page in this template. If your workbook already has further sheets (corrective actions, exceptions, incidents, training), leave them out of this model unless you have a clear visual that needs them. Do not relate those facts directly to Findings or Control Maturity; add them as additional facts on the same dimensions.</p>
+<hr />
+<h2 id="column-mapping-table">Column-mapping table<a class="headerlink" href="#column-mapping-table" title="Permanent link">&para;</a></h2>
+<p>Copy this table into your own notes or a worksheet called <code>Column Map</code> and fill the <strong>Your workbook</strong> column. Power Query should rename <strong>Your workbook</strong> headings to the <strong>Canonical name</strong>.</p>
+<h3 id="internal-audit-findings">Internal Audit Findings<a class="headerlink" href="#internal-audit-findings" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Canonical name</th>
+<th>Your workbook</th>
+<th>Transform / notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Finding_ID</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Finding_Title</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Finding_Type</td>
+<td></td>
+<td>Map synonyms to <code>NC</code> / <code>OFI</code> / <code>Gap</code> / <code>OBS</code></td>
+</tr>
+<tr>
+<td>Severity</td>
+<td></td>
+<td>Map synonyms to <code>Critical</code> / <code>High</code> / <code>Medium</code> / <code>Low</code></td>
+</tr>
+<tr>
+<td>Control_ID</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Entity</td>
+<td></td>
+<td>Harmonise spellings (<code>UK</code> vs <code>United Kingdom</code>)</td>
+</tr>
+<tr>
+<td>Owner_ID</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Owner_Name</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Raised_Date</td>
+<td></td>
+<td>Ensure type is Date, not DateTime or Text</td>
+</tr>
+<tr>
+<td>Target_Date</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Status</td>
+<td></td>
+<td>Map synonyms to <code>Open</code> / <code>In Progress</code> / <code>Closed</code></td>
+</tr>
+<tr>
+<td>Closed_Date</td>
+<td></td>
+<td>Blank if not closed</td>
+</tr>
+<tr>
+<td>Risk_Theme_ID</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Risk_Theme</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Description</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Root_Cause</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Source</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Auditor</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="control-maturity">Control Maturity<a class="headerlink" href="#control-maturity" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Canonical name</th>
+<th>Your workbook</th>
+<th>Transform / notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Control_ID</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Control_Name</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Annex_Category</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>&lt;Entity&gt;_Maturity</code> (repeat)</td>
+<td></td>
+<td>List every entity prefix you use</td>
+</tr>
+<tr>
+<td><code>&lt;Entity&gt;_Open_NC</code> (repeat)</td>
+<td></td>
+<td>Prefer a COUNTIFS back to Findings</td>
+</tr>
+<tr>
+<td><code>&lt;Entity&gt;_Open_OFI</code> (repeat)</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>&lt;Entity&gt;_Linked_Risk</code> (repeat)</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Entity prefixes in this workbook:</p>
+<table>
+<thead>
+<tr>
+<th>Entity display name</th>
+<th>Column prefix in maturity sheet</th>
+<th>Your prefix</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>United Kingdom</td>
+<td>UK_</td>
+<td></td>
+</tr>
+<tr>
+<td>Spain</td>
+<td>Spain_</td>
+<td></td>
+</tr>
+<tr>
+<td>France</td>
+<td>France_</td>
+<td></td>
+</tr>
+<tr>
+<td>Germany</td>
+<td>Germany_</td>
+<td></td>
+</tr>
+<tr>
+<td><em>(add rows)</em></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="risk-theme-mapping">Risk Theme Mapping<a class="headerlink" href="#risk-theme-mapping" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Canonical name</th>
+<th>Your workbook</th>
+<th>Transform / notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Control_ID</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Control_Name</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Annex_Category</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Risk_Theme_ID</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Risk_Theme</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Theme_Description</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Default_Likelihood</td>
+<td></td>
+<td>1–5</td>
+</tr>
+<tr>
+<td>Default_Impact</td>
+<td></td>
+<td>1–5</td>
+</tr>
+</tbody>
+</table>
+<h3 id="owners">Owners<a class="headerlink" href="#owners" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Canonical name</th>
+<th>Your workbook</th>
+<th>Transform / notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Owner_ID</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Owner_Name</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Role</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Entity</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Function</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Email</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Line_Manager</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="file-handling-notes">File handling notes<a class="headerlink" href="#file-handling-notes" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Keep a single current workbook path (or SharePoint URL) and store it in the <code>pWorkbookPath</code> parameter, not hard-coded in every query.</li>
+<li>If the workbook is on SharePoint or OneDrive, use the SharePoint folder or Web connector rather than a personal <code>C:\Users\...</code> path, otherwise refresh will fail for everyone else.</li>
+<li>Do not merge cells, and keep row 1 as a header row with no banner above it. Put the “fictional sample” warning in a column (<code>Data_Flag</code>) or in this documentation, not in a title row that breaks ingest.</li>
+<li>Dates should be true Excel dates. The sample uses the ISO format <code>yyyy-mm-dd</code> in the CSV copies.</li>
+</ul>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+  <h2 id="__comments">Comments</h2>
+  <!-- Comments use giscus (GitHub Discussions). The giscus GitHub App must be
+       installed on this repository: https://github.com/apps/giscus
+       The Comments category could not be created via API; this site uses the
+       default Announcements category (announcement format, which giscus recommends). -->
+  <script src="https://giscus.app/client.js"
+          data-repo="Jacnjill/grc-powerbi-dashboard-template"
+          data-repo-id="R_kgDOVqxk-Q"
+          data-category="Announcements"
+          data-category-id="DIC_kwDOVqxk-c4DK5T4"
+          data-mapping="pathname"
+          data-strict="0"
+          data-reactions-enabled="1"
+          data-emit-metadata="0"
+          data-input-position="bottom"
+          data-theme="preferred_color_scheme"
+          data-lang="en"
+          crossorigin="anonymous"
+          async>
+  </script>
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href=".." class="md-footer__link md-footer__link--prev" aria-label="Previous: Home">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Home
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../02-data-model/" class="md-footer__link md-footer__link--next" aria-label="Next: Data model">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Data model
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Released under the MIT Licence. Sample data is fictional and is not live evidence.
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://github.com/Jacnjill/grc-powerbi-dashboard-template" target="_blank" rel="noopener" title="Repository on GitHub" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.sections", "navigation.expand", "navigation.top", "navigation.footer", "search.highlight", "search.suggest", "content.code.copy", "content.action.edit", "toc.follow"], "search": "../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.a5f9d56c.min.js"></script>
+      
+    
+  </body>
+</html>

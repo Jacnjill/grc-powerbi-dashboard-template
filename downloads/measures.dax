@@ -1,0 +1,594 @@
+// =============================================================================
+// GRC Power BI dashboard template — DAX measures
+// Paste into a measures table (a common pattern is an empty table named
+// _Measures). Group by the display-folder names in the comments.
+//
+// Table names assumed:
+//   'Fact Findings', 'Fact Control Maturity',
+//   'Dim Date', 'Dim Control', 'Dim Entity', 'Dim Owner', 'Dim Risk Theme'
+//
+// Date relationships:
+//   Dim Date[Date] → Fact Findings[Raised_Date]     (active)
+//   Dim Date[Date] → Fact Findings[Target_Date]     (inactive)
+//   Dim Date[Date] → Fact Findings[Closed_Date]     (inactive)
+//
+// All comments are in UK English. Thresholds live in the _Parameters folder
+// so you can retune rules without rewriting measures.
+// =============================================================================
+
+
+// -----------------------------------------------------------------------------
+// Display folder: _Parameters
+// -----------------------------------------------------------------------------
+
+_Param Repeat Entity Threshold = 2
+// Minimum distinct entities with an open NC on the same control (or theme)
+// before the repeat-NC risk-candidate flag fires.
+
+_Param Persistent Days = 90
+// Open-day threshold for the ageing / persistent-NC flag.
+
+_Param Overdue Escalation Days = 60
+// Used on the ownership page escalation table.
+
+_Param Low Maturity = 2
+// Maturity at or below this, plus an open NC, fires the low-maturity flag.
+
+_Param Cluster Threshold = 3
+// Combined open OFI + OBS in a theme required to fire the cluster flag.
+
+_Param On Time Green = 0.80
+_Param On Time Amber = 0.60
+_Param Days To Close Green = 45
+_Param Days To Close Amber = 90
+_Param Overdue Amber Cap = 4
+// KPI RAG helpers. Visual conditional formatting should use the same numbers
+// (see docs/05-theme-and-style.md).
+
+
+// -----------------------------------------------------------------------------
+// Display folder: _Base
+// -----------------------------------------------------------------------------
+
+As At Date :=
+// Label for the report header. Format the visual as a date or use FORMAT in
+// a card: FORMAT ( [As At Date], "dd mmm yyyy" )
+TODAY ()
+
+Findings Count :=
+COUNTROWS ( 'Fact Findings' )
+
+Open Findings :=
+CALCULATE (
+    COUNTROWS ( 'Fact Findings' ),
+    'Fact Findings'[Status] IN { "Open", "In Progress" }
+)
+
+Closed Findings :=
+CALCULATE (
+    COUNTROWS ( 'Fact Findings' ),
+    'Fact Findings'[Status] = "Closed"
+)
+
+In Progress Findings :=
+CALCULATE (
+    COUNTROWS ( 'Fact Findings' ),
+    'Fact Findings'[Status] = "In Progress"
+)
+
+Overdue Findings :=
+CALCULATE (
+    [Open Findings],
+    FILTER (
+        'Fact Findings',
+        NOT ISBLANK ( 'Fact Findings'[Target_Date] )
+            && 'Fact Findings'[Target_Date] < TODAY ()
+    )
+)
+
+// Raised in the selected period uses the active Raised_Date relationship.
+Raised In Period :=
+CALCULATE (
+    COUNTROWS ( 'Fact Findings' )
+)
+
+// Closed in the selected period uses the inactive Closed_Date relationship.
+Closed Findings In Period :=
+CALCULATE (
+    COUNTROWS ( 'Fact Findings' ),
+    USERELATIONSHIP ( 'Dim Date'[Date], 'Fact Findings'[Closed_Date] ),
+    'Fact Findings'[Status] = "Closed"
+)
+
+Due In Period :=
+CALCULATE (
+    COUNTROWS ( 'Fact Findings' ),
+    USERELATIONSHIP ( 'Dim Date'[Date], 'Fact Findings'[Target_Date] )
+)
+
+Net Movement In Period :=
+[Raised In Period] - [Closed Findings In Period]
+
+
+// -----------------------------------------------------------------------------
+// Display folder: Ageing
+// -----------------------------------------------------------------------------
+
+% Closed On Time :=
+VAR ClosedOnTime =
+    CALCULATE (
+        COUNTROWS ( 'Fact Findings' ),
+        'Fact Findings'[Status] = "Closed",
+        NOT ISBLANK ( 'Fact Findings'[Closed_Date] ),
+        NOT ISBLANK ( 'Fact Findings'[Target_Date] ),
+        'Fact Findings'[Closed_Date] <= 'Fact Findings'[Target_Date]
+    )
+VAR ClosedWithDates =
+    CALCULATE (
+        COUNTROWS ( 'Fact Findings' ),
+        'Fact Findings'[Status] = "Closed",
+        NOT ISBLANK ( 'Fact Findings'[Closed_Date] ),
+        NOT ISBLANK ( 'Fact Findings'[Target_Date] )
+    )
+RETURN
+    DIVIDE ( ClosedOnTime, ClosedWithDates )
+
+Avg Days To Close :=
+AVERAGEX (
+    FILTER (
+        'Fact Findings',
+        'Fact Findings'[Status] = "Closed"
+            && NOT ISBLANK ( 'Fact Findings'[Closed_Date] )
+            && NOT ISBLANK ( 'Fact Findings'[Raised_Date] )
+    ),
+    INT ( 'Fact Findings'[Closed_Date] - 'Fact Findings'[Raised_Date] )
+)
+
+Avg Age Of Open Findings :=
+AVERAGEX (
+    FILTER (
+        'Fact Findings',
+        'Fact Findings'[Status] IN { "Open", "In Progress" }
+            && NOT ISBLANK ( 'Fact Findings'[Raised_Date] )
+    ),
+    INT ( TODAY () - 'Fact Findings'[Raised_Date] )
+)
+
+Days Overdue :=
+// Finding-level measure for tables. Blank when not overdue.
+VAR Target = SELECTEDVALUE ( 'Fact Findings'[Target_Date] )
+VAR Status = SELECTEDVALUE ( 'Fact Findings'[Status] )
+RETURN
+    IF (
+        Status IN { "Open", "In Progress" }
+            && NOT ISBLANK ( Target )
+            && Target < TODAY (),
+        INT ( TODAY () - Target )
+    )
+
+Age Days :=
+// Age of a single finding in a row context (detail table / drill-through).
+VAR Raised = SELECTEDVALUE ( 'Fact Findings'[Raised_Date] )
+VAR Closed = SELECTEDVALUE ( 'Fact Findings'[Closed_Date] )
+VAR Status = SELECTEDVALUE ( 'Fact Findings'[Status] )
+RETURN
+    IF (
+        ISBLANK ( Raised ),
+        BLANK (),
+        INT ( IF ( Status = "Closed" && NOT ISBLANK ( Closed ), Closed, TODAY () ) - Raised )
+    )
+
+Open Findings 0-30 :=
+CALCULATE (
+    [Open Findings],
+    FILTER (
+        'Fact Findings',
+        NOT ISBLANK ( 'Fact Findings'[Raised_Date] )
+            && INT ( TODAY () - 'Fact Findings'[Raised_Date] ) <= 30
+    )
+)
+
+Open Findings 31-60 :=
+CALCULATE (
+    [Open Findings],
+    FILTER (
+        'Fact Findings',
+        NOT ISBLANK ( 'Fact Findings'[Raised_Date] )
+            && INT ( TODAY () - 'Fact Findings'[Raised_Date] ) > 30
+            && INT ( TODAY () - 'Fact Findings'[Raised_Date] ) <= 60
+    )
+)
+
+Open Findings 61-90 :=
+CALCULATE (
+    [Open Findings],
+    FILTER (
+        'Fact Findings',
+        NOT ISBLANK ( 'Fact Findings'[Raised_Date] )
+            && INT ( TODAY () - 'Fact Findings'[Raised_Date] ) > 60
+            && INT ( TODAY () - 'Fact Findings'[Raised_Date] ) <= 90
+    )
+)
+
+Open Findings Over 90 :=
+CALCULATE (
+    [Open Findings],
+    FILTER (
+        'Fact Findings',
+        NOT ISBLANK ( 'Fact Findings'[Raised_Date] )
+            && INT ( TODAY () - 'Fact Findings'[Raised_Date] ) > 90
+    )
+)
+
+// Optional calculated column on Fact Findings (for slicers and the ageing axis).
+// Ageing Bucket =
+// VAR Days =
+//     INT (
+//         IF (
+//             'Fact Findings'[Status] = "Closed" && NOT ISBLANK ( 'Fact Findings'[Closed_Date] ),
+//             'Fact Findings'[Closed_Date],
+//             TODAY ()
+//         )
+//             - 'Fact Findings'[Raised_Date]
+//     )
+// RETURN
+//     SWITCH (
+//         TRUE (),
+//         ISBLANK ( 'Fact Findings'[Raised_Date] ), BLANK (),
+//         Days <= 30, "0–30 days",
+//         Days <= 60, "31–60 days",
+//         Days <= 90, "61–90 days",
+//         "Over 90 days"
+//     )
+//
+// Ageing Bucket Sort =
+// SWITCH (
+//     'Fact Findings'[Ageing Bucket],
+//     "0–30 days", 1,
+//     "31–60 days", 2,
+//     "61–90 days", 3,
+//     "Over 90 days", 4,
+//     9
+// )
+//
+// Is Overdue =
+//     'Fact Findings'[Status] IN { "Open", "In Progress" }
+//         && NOT ISBLANK ( 'Fact Findings'[Target_Date] )
+//         && 'Fact Findings'[Target_Date] < TODAY ()
+//
+// Closed On Time =
+//     'Fact Findings'[Status] = "Closed"
+//         && NOT ISBLANK ( 'Fact Findings'[Closed_Date] )
+//         && NOT ISBLANK ( 'Fact Findings'[Target_Date] )
+//         && 'Fact Findings'[Closed_Date] <= 'Fact Findings'[Target_Date]
+
+
+// -----------------------------------------------------------------------------
+// Display folder: Types
+// -----------------------------------------------------------------------------
+
+Open NC :=
+CALCULATE ( [Open Findings], 'Fact Findings'[Finding_Type] = "NC" )
+
+Open OFI :=
+CALCULATE ( [Open Findings], 'Fact Findings'[Finding_Type] = "OFI" )
+
+Open Gap :=
+CALCULATE ( [Open Findings], 'Fact Findings'[Finding_Type] = "Gap" )
+
+Open OBS :=
+CALCULATE ( [Open Findings], 'Fact Findings'[Finding_Type] = "OBS" )
+
+Closed NC :=
+CALCULATE ( [Closed Findings], 'Fact Findings'[Finding_Type] = "NC" )
+
+Open Critical :=
+CALCULATE ( [Open Findings], 'Fact Findings'[Severity] = "Critical" )
+
+Open High :=
+CALCULATE ( [Open Findings], 'Fact Findings'[Severity] = "High" )
+
+Open Medium :=
+CALCULATE ( [Open Findings], 'Fact Findings'[Severity] = "Medium" )
+
+Open Low :=
+CALCULATE ( [Open Findings], 'Fact Findings'[Severity] = "Low" )
+
+Open OFI Or OBS :=
+CALCULATE (
+    [Open Findings],
+    'Fact Findings'[Finding_Type] IN { "OFI", "OBS" }
+)
+
+
+// -----------------------------------------------------------------------------
+// Display folder: Maturity
+// -----------------------------------------------------------------------------
+
+Avg Maturity Score :=
+AVERAGEX ( 'Fact Control Maturity', 'Fact Control Maturity'[Maturity] )
+
+Controls Count :=
+COUNTROWS ( 'Fact Control Maturity' )
+
+Controls Below Target :=
+CALCULATE (
+    COUNTROWS ( 'Fact Control Maturity' ),
+    'Fact Control Maturity'[Maturity] <= [_Param Low Maturity]
+)
+
+% Controls Mature :=
+DIVIDE (
+    CALCULATE (
+        COUNTROWS ( 'Fact Control Maturity' ),
+        'Fact Control Maturity'[Maturity] >= 3
+    ),
+    [Controls Count]
+)
+
+Open NC (maturity fact) :=
+SUM ( 'Fact Control Maturity'[Open_NC] )
+
+Open OFI (maturity fact) :=
+SUM ( 'Fact Control Maturity'[Open_OFI] )
+
+Linked Risk Count :=
+CALCULATE (
+    COUNTROWS ( 'Fact Control Maturity' ),
+    NOT ISBLANK ( 'Fact Control Maturity'[Linked_Risk] )
+        && 'Fact Control Maturity'[Linked_Risk] <> ""
+)
+
+// Maturity of the control/entity of the current finding (no relationship
+// between the two facts). Use in a finding tooltip or detail page.
+Maturity For Finding Context :=
+VAR ThisControl = SELECTEDVALUE ( 'Fact Findings'[Control_ID] )
+VAR ThisEntity = SELECTEDVALUE ( 'Fact Findings'[Entity] )
+RETURN
+    CALCULATE (
+        [Avg Maturity Score],
+        TREATAS ( { ThisControl }, 'Fact Control Maturity'[Control_ID] ),
+        TREATAS ( { ThisEntity }, 'Fact Control Maturity'[Entity] )
+    )
+
+
+// -----------------------------------------------------------------------------
+// Display folder: Ownership
+// -----------------------------------------------------------------------------
+
+Owner % On Time :=
+// Same definition as % Closed On Time; separately named so it can sit in the
+// owner display folder and be formatted independently if needed.
+[% Closed On Time]
+
+Owner Open Findings :=
+[Open Findings]
+
+Owner Overdue Findings :=
+[Overdue Findings]
+
+
+// -----------------------------------------------------------------------------
+// Display folder: Risk
+// -----------------------------------------------------------------------------
+
+Entities With Open NC :=
+// Distinct entities that have at least one open NC in the current context
+// (control, theme, or report-level).
+CALCULATE (
+    DISTINCTCOUNT ( 'Fact Findings'[Entity] ),
+    'Fact Findings'[Status] IN { "Open", "In Progress" },
+    'Fact Findings'[Finding_Type] = "NC"
+)
+
+Flag Repeat NC :=
+// 1 if an open NC for the same control (or, at theme level, across the theme)
+// appears in at least N entities.
+IF ( [Entities With Open NC] >= [_Param Repeat Entity Threshold], 1, 0 )
+
+Flag Ageing :=
+// 1 if any open NC is overdue or has been open longer than Persistent Days.
+VAR Persistent =
+    CALCULATE (
+        COUNTROWS ( 'Fact Findings' ),
+        'Fact Findings'[Status] IN { "Open", "In Progress" },
+        'Fact Findings'[Finding_Type] = "NC",
+        FILTER (
+            'Fact Findings',
+            (
+                NOT ISBLANK ( 'Fact Findings'[Target_Date] )
+                    && 'Fact Findings'[Target_Date] < TODAY ()
+            )
+                || (
+                    NOT ISBLANK ( 'Fact Findings'[Raised_Date] )
+                        && INT ( TODAY () - 'Fact Findings'[Raised_Date] ) > [_Param Persistent Days]
+                )
+        )
+    )
+RETURN
+    IF ( Persistent > 0, 1, 0 )
+
+Flag Low Maturity NC :=
+// 1 if any control/entity pair in context has maturity at or below the
+// threshold and an open NC on the maturity fact.
+VAR Hits =
+    COUNTROWS (
+        FILTER (
+            'Fact Control Maturity',
+            'Fact Control Maturity'[Maturity] <= [_Param Low Maturity]
+                && 'Fact Control Maturity'[Open_NC] >= 1
+        )
+    )
+RETURN
+    IF ( Hits > 0, 1, 0 )
+
+Flag Cluster :=
+// 1 if open OFI + OBS in the current theme (or other context) meets the threshold.
+IF ( [Open OFI Or OBS] >= [_Param Cluster Threshold], 1, 0 )
+
+Is Risk Candidate :=
+IF (
+    [Flag Repeat NC] + [Flag Ageing] + [Flag Low Maturity NC] + [Flag Cluster] >= 1,
+    1,
+    0
+)
+
+Risk Candidate Score :=
+// 0–100 index for sorting the candidate table. Not a likelihood or impact.
+// Weights and bumps are documented in docs/04-risk-candidate-rules.md.
+VAR RepeatFlag = [Flag Repeat NC]
+VAR AgeFlag = [Flag Ageing]
+VAR MaturityFlag = [Flag Low Maturity NC]
+VAR ClusterFlag = [Flag Cluster]
+VAR EntityCount = [Entities With Open NC]
+VAR CriticalOpen = [Open Critical]
+VAR OpenNCCount = [Open NC]
+VAR ClusterSize = [Open OFI Or OBS]
+VAR InformalHits =
+    COUNTROWS (
+        FILTER (
+            'Fact Control Maturity',
+            'Fact Control Maturity'[Maturity] = 1
+                && 'Fact Control Maturity'[Open_NC] >= 1
+        )
+    )
+VAR VeryPersistent =
+    CALCULATE (
+        COUNTROWS ( 'Fact Findings' ),
+        'Fact Findings'[Status] IN { "Open", "In Progress" },
+        'Fact Findings'[Finding_Type] = "NC",
+        FILTER (
+            'Fact Findings',
+            (
+                NOT ISBLANK ( 'Fact Findings'[Raised_Date] )
+                    && INT ( TODAY () - 'Fact Findings'[Raised_Date] ) > 180
+            )
+                || (
+                    NOT ISBLANK ( 'Fact Findings'[Target_Date] )
+                        && INT ( TODAY () - 'Fact Findings'[Target_Date] ) > 60
+                )
+        )
+    )
+VAR Base =
+    RepeatFlag * 35
+        + AgeFlag * 25
+        + MaturityFlag * 25
+        + ClusterFlag * 15
+VAR Bumps =
+    IF ( RepeatFlag = 1 && EntityCount >= 3, 5, 0 )
+        + IF ( RepeatFlag = 1 && CriticalOpen > 0, 5, 0 )
+        + IF ( AgeFlag = 1 && VeryPersistent > 0, 5, 0 )
+        + IF ( MaturityFlag = 1 && InformalHits > 0, 5, 0 )
+        + IF ( ClusterFlag = 1 && ClusterSize >= 6, 5, 0 )
+RETURN
+    IF ( Base = 0, 0, MIN ( 100, Base + Bumps ) )
+
+Candidate Recommendation :=
+VAR Score = [Risk Candidate Score]
+VAR AlreadyLinked = [Linked Risk Count]
+RETURN
+    SWITCH (
+        TRUE (),
+        Score = 0, "Not a candidate",
+        AlreadyLinked > 0 && Score >= 71, "Already on register — escalate treatment",
+        AlreadyLinked > 0, "Already on register — review treatment",
+        Score <= 40, "Discuss as grouped action",
+        Score <= 70, "Workshop — propose risk",
+        "Escalate — strong candidate"
+    )
+
+Candidate Themes :=
+// Count of risk themes that are candidates in the current filter context.
+CALCULATE (
+    COUNTROWS (
+        FILTER (
+            VALUES ( 'Dim Risk Theme'[Risk_Theme_ID] ),
+            [Is Risk Candidate] = 1
+        )
+    )
+)
+
+Candidate Findings :=
+// Open findings that sit in a candidate theme. Useful as a KPI, not a flag.
+CALCULATE (
+    [Open Findings],
+    FILTER (
+        VALUES ( 'Dim Risk Theme'[Risk_Theme_ID] ),
+        [Is Risk Candidate] = 1
+    )
+)
+
+Themes With No Linked Risk :=
+CALCULATE (
+    COUNTROWS (
+        FILTER (
+            VALUES ( 'Dim Risk Theme'[Risk_Theme_ID] ),
+            [Is Risk Candidate] = 1
+                && [Linked Risk Count] = 0
+        )
+    )
+)
+
+Derived Likelihood :=
+// 1–5, first-match bands. See docs/04-risk-candidate-rules.md.
+VAR RepeatEntities = [Entities With Open NC]
+VAR OpenNCs = [Open NC]
+VAR AgeFlag = [Flag Ageing]
+VAR ClusterFlag = [Flag Cluster]
+VAR AnyOpen = [Open Findings]
+RETURN
+    SWITCH (
+        TRUE (),
+        RepeatEntities >= 3 || OpenNCs >= 5, 5,
+        RepeatEntities >= 2 || OpenNCs >= 3 || AgeFlag = 1, 4,
+        OpenNCs >= 1 || ClusterFlag = 1, 3,
+        AnyOpen >= 1, 2,
+        1
+    )
+
+Derived Impact :=
+// 1–5, first-match bands.
+VAR Crit = [Open Critical]
+VAR High = [Open High]
+VAR Med = [Open Medium]
+VAR Low = [Open Low]
+VAR InformalWithNC =
+    COUNTROWS (
+        FILTER (
+            'Fact Control Maturity',
+            'Fact Control Maturity'[Maturity] = 1
+                && 'Fact Control Maturity'[Open_NC] >= 1
+        )
+    )
+VAR LowMaturityFlag = [Flag Low Maturity NC]
+VAR AnyOpen = [Open Findings]
+RETURN
+    SWITCH (
+        TRUE (),
+        Crit > 0 || InformalWithNC > 0, 5,
+        High > 0 || LowMaturityFlag = 1, 4,
+        Med > 0 || AnyOpen >= 3, 3,
+        Low > 0 || AnyOpen >= 1, 2,
+        1
+    )
+
+Heat Map Score :=
+[Derived Likelihood] * [Derived Impact]
+
+Heat Map Band :=
+VAR Score = [Heat Map Score]
+RETURN
+    SWITCH (
+        TRUE (),
+        Score <= 4, "Low",
+        Score <= 9, "Moderate",
+        Score <= 16, "High",
+        "Extreme"
+    )
+
+// Optional: a weighted severity used if you prefer a formula to the impact bands.
+Weighted Severity Points :=
+CALCULATE ( [Open Findings], 'Fact Findings'[Severity] = "Critical" ) * 5
+    + CALCULATE ( [Open Findings], 'Fact Findings'[Severity] = "High" ) * 4
+    + CALCULATE ( [Open Findings], 'Fact Findings'[Severity] = "Medium" ) * 3
+    + CALCULATE ( [Open Findings], 'Fact Findings'[Severity] = "Low" ) * 2

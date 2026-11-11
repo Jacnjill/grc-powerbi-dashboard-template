@@ -1,0 +1,94 @@
+Control_ID,Control_Name,Annex_Category,Risk_Theme_ID,Risk_Theme,Theme_Description,Default_Likelihood,Default_Impact,Data_Flag
+5.1,Policies for information security,Organizational,RT-10,Compliance and assurance,"Policies, roles, management responsibilities, legal requirements and independent review.",2,4,Fictional sample
+5.2,Information security roles and responsibilities,Organizational,RT-10,Compliance and assurance,"Policies, roles, management responsibilities, legal requirements and independent review.",2,4,Fictional sample
+5.3,Segregation of duties,Organizational,RT-10,Compliance and assurance,"Policies, roles, management responsibilities, legal requirements and independent review.",2,4,Fictional sample
+5.4,Management responsibilities,Organizational,RT-10,Compliance and assurance,"Policies, roles, management responsibilities, legal requirements and independent review.",2,4,Fictional sample
+5.5,Contact with authorities,Organizational,RT-10,Compliance and assurance,"Policies, roles, management responsibilities, legal requirements and independent review.",2,4,Fictional sample
+5.6,Contact with special interest groups,Organizational,RT-10,Compliance and assurance,"Policies, roles, management responsibilities, legal requirements and independent review.",2,4,Fictional sample
+5.7,Threat intelligence,Organizational,RT-10,Compliance and assurance,"Policies, roles, management responsibilities, legal requirements and independent review.",2,4,Fictional sample
+5.8,Information security in project management,Organizational,RT-07,Asset and change management,"Asset inventory, return of assets, endpoints, capacity, environment separation and change.",3,3,Fictional sample
+5.9,Inventory of information and other associated assets,Organizational,RT-07,Asset and change management,"Asset inventory, return of assets, endpoints, capacity, environment separation and change.",3,3,Fictional sample
+5.10,Acceptable use of information and other associated assets,Organizational,RT-03,Data protection and confidentiality,"Classification, transfer, privacy, records, encryption, masking and leakage prevention.",3,5,Fictional sample
+5.11,Return of assets,Organizational,RT-07,Asset and change management,"Asset inventory, return of assets, endpoints, capacity, environment separation and change.",3,3,Fictional sample
+5.12,Classification of information,Organizational,RT-03,Data protection and confidentiality,"Classification, transfer, privacy, records, encryption, masking and leakage prevention.",3,5,Fictional sample
+5.13,Labelling of information,Organizational,RT-03,Data protection and confidentiality,"Classification, transfer, privacy, records, encryption, masking and leakage prevention.",3,5,Fictional sample
+5.14,Information transfer,Organizational,RT-03,Data protection and confidentiality,"Classification, transfer, privacy, records, encryption, masking and leakage prevention.",3,5,Fictional sample
+5.15,Access control,Organizational,RT-01,Access control and identity,"Identity lifecycle, authentication, access rights and privileged access.",4,5,Fictional sample
+5.16,Identity management,Organizational,RT-01,Access control and identity,"Identity lifecycle, authentication, access rights and privileged access.",4,5,Fictional sample
+5.17,Authentication information,Organizational,RT-01,Access control and identity,"Identity lifecycle, authentication, access rights and privileged access.",4,5,Fictional sample
+5.18,Access rights,Organizational,RT-01,Access control and identity,"Identity lifecycle, authentication, access rights and privileged access.",4,5,Fictional sample
+5.19,Information security in supplier relationships,Organizational,RT-02,Third-party and supply chain,"Supplier selection, agreements, ICT supply chain, cloud service use and oversight.",4,4,Fictional sample
+5.20,Addressing information security within supplier agreements,Organizational,RT-02,Third-party and supply chain,"Supplier selection, agreements, ICT supply chain, cloud service use and oversight.",4,4,Fictional sample
+5.21,Managing information security in the ICT supply chain,Organizational,RT-02,Third-party and supply chain,"Supplier selection, agreements, ICT supply chain, cloud service use and oversight.",4,4,Fictional sample
+5.22,"Monitoring, review and change management of supplier services",Organizational,RT-02,Third-party and supply chain,"Supplier selection, agreements, ICT supply chain, cloud service use and oversight.",4,4,Fictional sample
+5.23,Information security for use of cloud services,Organizational,RT-02,Third-party and supply chain,"Supplier selection, agreements, ICT supply chain, cloud service use and oversight.",4,4,Fictional sample
+5.24,Information security incident management planning and preparation,Organizational,RT-06,Incident response and resilience,"Incident planning, response, lessons learned, backups, redundancy and continuity.",3,5,Fictional sample
+5.25,Assessment and decision on information security events,Organizational,RT-06,Incident response and resilience,"Incident planning, response, lessons learned, backups, redundancy and continuity.",3,5,Fictional sample
+5.26,Response to information security incidents,Organizational,RT-06,Incident response and resilience,"Incident planning, response, lessons learned, backups, redundancy and continuity.",3,5,Fictional sample
+5.27,Learning from information security incidents,Organizational,RT-06,Incident response and resilience,"Incident planning, response, lessons learned, backups, redundancy and continuity.",3,5,Fictional sample
+5.28,Collection of evidence,Organizational,RT-06,Incident response and resilience,"Incident planning, response, lessons learned, backups, redundancy and continuity.",3,5,Fictional sample
+5.29,Information security during disruption,Organizational,RT-06,Incident response and resilience,"Incident planning, response, lessons learned, backups, redundancy and continuity.",3,5,Fictional sample
+5.30,ICT readiness for business continuity,Organizational,RT-06,Incident response and resilience,"Incident planning, response, lessons learned, backups, redundancy and continuity.",3,5,Fictional sample
+5.31,"Legal, statutory, regulatory and contractual requirements",Organizational,RT-10,Compliance and assurance,"Policies, roles, management responsibilities, legal requirements and independent review.",2,4,Fictional sample
+5.32,Intellectual property rights,Organizational,RT-03,Data protection and confidentiality,"Classification, transfer, privacy, records, encryption, masking and leakage prevention.",3,5,Fictional sample
+5.33,Protection of records,Organizational,RT-03,Data protection and confidentiality,"Classification, transfer, privacy, records, encryption, masking and leakage prevention.",3,5,Fictional sample
+5.34,Privacy and protection of PII,Organizational,RT-03,Data protection and confidentiality,"Classification, transfer, privacy, records, encryption, masking and leakage prevention.",3,5,Fictional sample
+5.35,Independent review of information security,Organizational,RT-10,Compliance and assurance,"Policies, roles, management responsibilities, legal requirements and independent review.",2,4,Fictional sample
+5.36,"Compliance with policies, rules and standards for information security",Organizational,RT-10,Compliance and assurance,"Policies, roles, management responsibilities, legal requirements and independent review.",2,4,Fictional sample
+5.37,Documented operating procedures,Organizational,RT-10,Compliance and assurance,"Policies, roles, management responsibilities, legal requirements and independent review.",2,4,Fictional sample
+6.1,Screening,People,RT-05,Human factor and awareness,"Screening, employment terms, awareness, remote working, event reporting and clear desk.",3,3,Fictional sample
+6.2,Terms and conditions of employment,People,RT-05,Human factor and awareness,"Screening, employment terms, awareness, remote working, event reporting and clear desk.",3,3,Fictional sample
+6.3,"Information security awareness, education and training",People,RT-05,Human factor and awareness,"Screening, employment terms, awareness, remote working, event reporting and clear desk.",3,3,Fictional sample
+6.4,Disciplinary process,People,RT-05,Human factor and awareness,"Screening, employment terms, awareness, remote working, event reporting and clear desk.",3,3,Fictional sample
+6.5,Responsibilities after termination or change of employment,People,RT-05,Human factor and awareness,"Screening, employment terms, awareness, remote working, event reporting and clear desk.",3,3,Fictional sample
+6.6,Confidentiality or non-disclosure agreements,People,RT-03,Data protection and confidentiality,"Classification, transfer, privacy, records, encryption, masking and leakage prevention.",3,5,Fictional sample
+6.7,Remote working,People,RT-05,Human factor and awareness,"Screening, employment terms, awareness, remote working, event reporting and clear desk.",3,3,Fictional sample
+6.8,Information security event reporting,People,RT-05,Human factor and awareness,"Screening, employment terms, awareness, remote working, event reporting and clear desk.",3,3,Fictional sample
+7.1,Physical security perimeters,Physical,RT-09,Physical and environmental security,"Perimeters, entry, facilities, monitoring, environmental threats, media and equipment.",2,3,Fictional sample
+7.2,Physical entry,Physical,RT-09,Physical and environmental security,"Perimeters, entry, facilities, monitoring, environmental threats, media and equipment.",2,3,Fictional sample
+7.3,"Securing offices, rooms and facilities",Physical,RT-09,Physical and environmental security,"Perimeters, entry, facilities, monitoring, environmental threats, media and equipment.",2,3,Fictional sample
+7.4,Physical security monitoring,Physical,RT-09,Physical and environmental security,"Perimeters, entry, facilities, monitoring, environmental threats, media and equipment.",2,3,Fictional sample
+7.5,Protecting against physical and environmental threats,Physical,RT-09,Physical and environmental security,"Perimeters, entry, facilities, monitoring, environmental threats, media and equipment.",2,3,Fictional sample
+7.6,Working in secure areas,Physical,RT-09,Physical and environmental security,"Perimeters, entry, facilities, monitoring, environmental threats, media and equipment.",2,3,Fictional sample
+7.7,Clear desk and clear screen,Physical,RT-05,Human factor and awareness,"Screening, employment terms, awareness, remote working, event reporting and clear desk.",3,3,Fictional sample
+7.8,Equipment siting and protection,Physical,RT-09,Physical and environmental security,"Perimeters, entry, facilities, monitoring, environmental threats, media and equipment.",2,3,Fictional sample
+7.9,Security of assets off-premises,Physical,RT-09,Physical and environmental security,"Perimeters, entry, facilities, monitoring, environmental threats, media and equipment.",2,3,Fictional sample
+7.10,Storage media,Physical,RT-09,Physical and environmental security,"Perimeters, entry, facilities, monitoring, environmental threats, media and equipment.",2,3,Fictional sample
+7.11,Supporting utilities,Physical,RT-09,Physical and environmental security,"Perimeters, entry, facilities, monitoring, environmental threats, media and equipment.",2,3,Fictional sample
+7.12,Cabling security,Physical,RT-09,Physical and environmental security,"Perimeters, entry, facilities, monitoring, environmental threats, media and equipment.",2,3,Fictional sample
+7.13,Equipment maintenance,Physical,RT-09,Physical and environmental security,"Perimeters, entry, facilities, monitoring, environmental threats, media and equipment.",2,3,Fictional sample
+7.14,Secure disposal or re-use of equipment,Physical,RT-09,Physical and environmental security,"Perimeters, entry, facilities, monitoring, environmental threats, media and equipment.",2,3,Fictional sample
+8.1,User endpoint devices,Technological,RT-07,Asset and change management,"Asset inventory, return of assets, endpoints, capacity, environment separation and change.",3,3,Fictional sample
+8.2,Privileged access rights,Technological,RT-01,Access control and identity,"Identity lifecycle, authentication, access rights and privileged access.",4,5,Fictional sample
+8.3,Information access restriction,Technological,RT-01,Access control and identity,"Identity lifecycle, authentication, access rights and privileged access.",4,5,Fictional sample
+8.4,Access to source code,Technological,RT-08,Cloud and emerging technology,"Secure development, application security, architecture, coding, testing and source-code access, including unsanctioned AI tools.",3,4,Fictional sample
+8.5,Secure authentication,Technological,RT-01,Access control and identity,"Identity lifecycle, authentication, access rights and privileged access.",4,5,Fictional sample
+8.6,Capacity management,Technological,RT-07,Asset and change management,"Asset inventory, return of assets, endpoints, capacity, environment separation and change.",3,3,Fictional sample
+8.7,Protection against malware,Technological,RT-04,Vulnerability and technical hygiene,"Patching, configuration, malware, logging, monitoring, network and web protection.",4,4,Fictional sample
+8.8,Management of technical vulnerabilities,Technological,RT-04,Vulnerability and technical hygiene,"Patching, configuration, malware, logging, monitoring, network and web protection.",4,4,Fictional sample
+8.9,Configuration management,Technological,RT-04,Vulnerability and technical hygiene,"Patching, configuration, malware, logging, monitoring, network and web protection.",4,4,Fictional sample
+8.10,Information deletion,Technological,RT-03,Data protection and confidentiality,"Classification, transfer, privacy, records, encryption, masking and leakage prevention.",3,5,Fictional sample
+8.11,Data masking,Technological,RT-03,Data protection and confidentiality,"Classification, transfer, privacy, records, encryption, masking and leakage prevention.",3,5,Fictional sample
+8.12,Data leakage prevention,Technological,RT-03,Data protection and confidentiality,"Classification, transfer, privacy, records, encryption, masking and leakage prevention.",3,5,Fictional sample
+8.13,Information backup,Technological,RT-06,Incident response and resilience,"Incident planning, response, lessons learned, backups, redundancy and continuity.",3,5,Fictional sample
+8.14,Redundancy of information processing facilities,Technological,RT-06,Incident response and resilience,"Incident planning, response, lessons learned, backups, redundancy and continuity.",3,5,Fictional sample
+8.15,Logging,Technological,RT-04,Vulnerability and technical hygiene,"Patching, configuration, malware, logging, monitoring, network and web protection.",4,4,Fictional sample
+8.16,Monitoring activities,Technological,RT-04,Vulnerability and technical hygiene,"Patching, configuration, malware, logging, monitoring, network and web protection.",4,4,Fictional sample
+8.17,Clock synchronisation,Technological,RT-04,Vulnerability and technical hygiene,"Patching, configuration, malware, logging, monitoring, network and web protection.",4,4,Fictional sample
+8.18,Use of privileged utility programs,Technological,RT-01,Access control and identity,"Identity lifecycle, authentication, access rights and privileged access.",4,5,Fictional sample
+8.19,Installation of software on operational systems,Technological,RT-04,Vulnerability and technical hygiene,"Patching, configuration, malware, logging, monitoring, network and web protection.",4,4,Fictional sample
+8.20,Networks security,Technological,RT-04,Vulnerability and technical hygiene,"Patching, configuration, malware, logging, monitoring, network and web protection.",4,4,Fictional sample
+8.21,Security of network services,Technological,RT-04,Vulnerability and technical hygiene,"Patching, configuration, malware, logging, monitoring, network and web protection.",4,4,Fictional sample
+8.22,Segregation of networks,Technological,RT-04,Vulnerability and technical hygiene,"Patching, configuration, malware, logging, monitoring, network and web protection.",4,4,Fictional sample
+8.23,Web filtering,Technological,RT-04,Vulnerability and technical hygiene,"Patching, configuration, malware, logging, monitoring, network and web protection.",4,4,Fictional sample
+8.24,Use of cryptography,Technological,RT-03,Data protection and confidentiality,"Classification, transfer, privacy, records, encryption, masking and leakage prevention.",3,5,Fictional sample
+8.25,Secure development life cycle,Technological,RT-08,Cloud and emerging technology,"Secure development, application security, architecture, coding, testing and source-code access, including unsanctioned AI tools.",3,4,Fictional sample
+8.26,Application security requirements,Technological,RT-08,Cloud and emerging technology,"Secure development, application security, architecture, coding, testing and source-code access, including unsanctioned AI tools.",3,4,Fictional sample
+8.27,Secure system architecture and engineering principles,Technological,RT-08,Cloud and emerging technology,"Secure development, application security, architecture, coding, testing and source-code access, including unsanctioned AI tools.",3,4,Fictional sample
+8.28,Secure coding,Technological,RT-08,Cloud and emerging technology,"Secure development, application security, architecture, coding, testing and source-code access, including unsanctioned AI tools.",3,4,Fictional sample
+8.29,Security testing in development and acceptance,Technological,RT-08,Cloud and emerging technology,"Secure development, application security, architecture, coding, testing and source-code access, including unsanctioned AI tools.",3,4,Fictional sample
+8.30,Outsourced development,Technological,RT-02,Third-party and supply chain,"Supplier selection, agreements, ICT supply chain, cloud service use and oversight.",4,4,Fictional sample
+8.31,"Separation of development, test and production environments",Technological,RT-07,Asset and change management,"Asset inventory, return of assets, endpoints, capacity, environment separation and change.",3,3,Fictional sample
+8.32,Change management,Technological,RT-07,Asset and change management,"Asset inventory, return of assets, endpoints, capacity, environment separation and change.",3,3,Fictional sample
+8.33,Test information,Technological,RT-07,Asset and change management,"Asset inventory, return of assets, endpoints, capacity, environment separation and change.",3,3,Fictional sample
+8.34,Protection of information systems during audit testing,Technological,RT-07,Asset and change management,"Asset inventory, return of assets, endpoints, capacity, environment separation and change.",3,3,Fictional sample
